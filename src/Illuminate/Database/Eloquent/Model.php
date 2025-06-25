@@ -1430,7 +1430,9 @@ abstract class Model implements Arrayable, ArrayAccess, CanBeEscapedWhenCastToSt
     {
         $id = $query->insertGetId($attributes, $keyName = $this->getKeyName());
 
-        $this->setAttribute($keyName, $id);
+        if (!array_key_exists($keyName, $attributes)) {
+            $this->setAttribute($keyName, $id);
+        }
     }
 
     /**
